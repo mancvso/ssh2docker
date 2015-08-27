@@ -94,7 +94,7 @@ func (s *Server) Handle(netConn net.Conn) error {
 					}
 					ok = true
 
-					args := []string{"run", "-it", "--rm", conn.User(), "/bin/sh"}
+					args := []string{"run", "-it", "--rm", "quay.io/omen/jail", "--volumes-from", conn.User() + "__data", "/bin/sh"}
 					logrus.Infof("Executing docker %s", args)
 					cmd := exec.Command("docker", args...)
 					cmd.Env = []string{
